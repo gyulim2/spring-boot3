@@ -15,8 +15,8 @@ public class UserController {
     private StringRedisTemplate redis;
 
     @GetMapping("/")
-    public String home() {
-        return "hi";
+    public String hello2() {
+        return "<body bgcolor=yellow>changed!!!! -------</body>";
     }
 
     @GetMapping("/db-test")
