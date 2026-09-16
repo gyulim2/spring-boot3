@@ -31,6 +31,21 @@ public class UserController {
         }
     }
 
+    //table생성
+    //member(id, pw)
+    //select id from member;
+    @GetMapping("/mysql2")
+    public String dbTest2() {
+        try {
+            String sql = "SELECT now()";
+            String result = jdbcTemplate.queryForObject(sql, String.class);
+            return "Database test successful. now() : " + result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Database connection failed! Error: " + e.getMessage();
+        }
+    }
+
     @GetMapping("/redis-set")
     public String redisSet() {
         try {
