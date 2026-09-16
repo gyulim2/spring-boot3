@@ -1,7 +1,7 @@
 services:
   web2:
-    build: ./springboot-app2
-    #image: gyulim2/springboot2-web2:2.0
+    #build: ./springboot-app2
+    image: gyulim2/springboot2-web2:2.0
     container_name: springboot_app2
     ports: 
       - "9090:8080"
@@ -20,6 +20,7 @@ services:
   db2:
     image: mysql:8
     container_name: mysql_db2
+    command: --innodb-buffer-pool-size=128M --performance-schema=OFF --table-open-cache=400 --max-connections=50
     environment:
       - MYSQL_ROOT_PASSWORD=1212
       - MYSQL_DATABASE=demo_db2
@@ -27,7 +28,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
       timeout: 3s
-      retries: 10
+      retries: 20
+      start_period: 60s
     volumes:
       - mysql_data2:/var/lib/mysql
     ports:
